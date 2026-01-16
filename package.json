@@ -1,0 +1,7 @@
+{
+  "name": "proyecto-cocina-root",
+  "private": true,
+  "engines": {
+    "node": "24.x"
+  }
+}
