@@ -19,7 +19,20 @@ connectDatabase()
 
 
 // Middlewares globales
-app.use(cors()) // Permite solicitudes de otros dominios
+import cors from 'cors'
+
+// Configuración de CORS
+app.use(
+  cors({
+    origin: [
+      'http://localhost:5173',                // Frontend local
+      'https://proyecto-cocina-nu.vercel.app' // Frontend en Vercel
+    ],
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+  })
+)
+// Permite solicitudes de otros dominios
 app.use(helmet()) // Añade cabeceras de seguridad
 app.use(morgan('dev')) // Loguea peticiones HTTP
 app.use(express.json()) // Parsear JSON
