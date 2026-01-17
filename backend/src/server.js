@@ -1,11 +1,13 @@
-import 'dotenv/config'; // carga variables de entorno
-
-// Importa la app de Express configurada
 import app from './app.js'
+import { connectDatabase } from './config/database.js'
+import dotenv from 'dotenv'
+dotenv.config()
 
 
+const PORT = process.env.PORT || 4000
 
-// Arranca el servidor en el puerto definido en .env
-app.listen(process.env.PORT, () => {
-console.log(`Servidor escuchando en puerto ${process.env.PORT}`)
+connectDatabase()
+
+app.listen(PORT, () => {
+  console.log(`Servidor escuchando en puerto ${PORT}`)
 })

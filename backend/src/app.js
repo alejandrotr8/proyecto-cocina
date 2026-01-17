@@ -1,51 +1,36 @@
-import 'dotenv/config'
 import express from 'express'
 import cors from 'cors'
-import helmet from 'helmet'
 import morgan from 'morgan'
-import connectDatabase from './config/database.js'
+
 import authRoutes from './routes/auth-routes.js'
 import recipeRoutes from './routes/recipe-routes.js'
-import notFoundMiddleware from './middlewares/not-found-middleware.js'
-import errorMiddleware from './middlewares/error-middleware.js'
 
-
-// Inicializa Express
 const app = express()
 
+// ---------- MIDDLEWARES GLOBALES ----------
 
-// Conecta a MongoDB
-connectDatabase()
+// Permite peticiones desde frontend local y Vercel
+app.use(cors())
 
+// Logs HTTP (mejor que console.log)
+app.use(morgan('dev'))
 
-// Middlewares globales
-import cors from 'cors'
+// Parseo de JSON
+app.use(express.json())
 
-// Configuración de CORS
-app.use(
-  cors({
-    origin: [
-      'http://localhost:5173',                // Frontend local
-      'https://proyecto-cocina-nu.vercel.app' // Frontend en Vercel
-    ],
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization']
-  })
-)
-// Permite solicitudes de otros dominios
-app.use(helmet()) // Añade cabeceras de seguridad
-app.use(morgan('dev')) // Loguea peticiones HTTP
-app.use(express.json()) // Parsear JSON
+// ---------- RUTAS ----------
+app.use('/api/auth', authRoutes)
+app.use('/api/recipes', recipeRoutes)
 
+// ---------- 404 ----------
+app.use((req, res) => {
+  res.status(404).json({ message: 'Ruta no encontrada' })
+})
 
-// Rutas
-app.use('/api/auth', authRoutes) // Login y registro
-app.use('/api/recipes', recipeRoutes) // CRUD de recetas
-
-
-// Middlewares de error
-app.use(notFoundMiddleware) // 404
-app.use(errorMiddleware) // 500
-
+// ---------- 500 ----------
+app.use((err, req, res, next) => {
+  console.error(err)
+  res.status(500).json({ message: 'Error interno del servidor' })
+})
 
 export default app
