@@ -1,0 +1,13 @@
+Memoria académica completa redactada
+2️⃣ 🎓 Guion para defensa oral
+3️⃣ ☁️ Despliegue paso a paso (Render + Vercel)
+4️⃣ 🎨 Mejora visual final del frontend
+5️⃣ 📦 Checklist final de evaluación
+
+
+
+
+
+
+https://proyecto-cocina.onrender.com
+https://github.com/alejandrotr8/proyecto-cocina
