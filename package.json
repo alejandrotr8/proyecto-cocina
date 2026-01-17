@@ -1,23 +1,8 @@
 {
-  "name": "frontend",
+  "name": "proyecto-cocina-root",
   "private": true,
-  "type": "module",
   "engines": {
     "node": "24.x"
-  },
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
-  },
-  "dependencies": {
-    "axios": "^1.6.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-router-dom": "^6.22.0"
-  },
-  "devDependencies": {
-    "vite": "^7.3.1",
-    "@vitejs/plugin-react": "^4.2.0"
   }
 }
+
