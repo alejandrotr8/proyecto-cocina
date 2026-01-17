@@ -13,6 +13,9 @@ function Login() {
     e.preventDefault()
     setError(null)
 
+    console.log('API URL:', import.meta.env.VITE_API_URL)
+
+
     try {
       // Petición al backend
       const response = await axios.post(
